@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "QUESTION KIRO SPECS",
+  "description": "Analyzes the spec structure in .kiro/specs folder and updates PITCH/SPECS.txt with insights on spec-driven development",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      ".kiro/specs/**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analyze the files in .kiro/specs folder to understand how specs are structured for Kiro to implement. Create or update PITCH/SPECS.txt with your findings, focusing on:\n1. The overall structure of specs (requirements, design, tasks, etc.)\n2. How the specs are organized to guide implementation\n3. How the spec-driven approach improves the development process\n4. Examples of effective spec patterns found in the files\n5. Recommendations for spec-driven development\n\nInclude specific examples from the specs to illustrate your points. Format the document in a clear, professional manner with appropriate sections and headings."
+  }
+}

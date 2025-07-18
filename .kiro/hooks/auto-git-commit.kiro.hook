@@ -1,0 +1,24 @@
+{
+  "enabled": true,
+  "name": "GIT PUSH AUTO",
+  "description": "Automatically stages all changes, creates a commit with proper conventional commit format based on commit-messages.md guidelines, and pushes to remote repository",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      "src/**/*",
+      "supabase/**/*",
+      "*.ts",
+      "*.tsx",
+      "*.js",
+      "*.jsx",
+      "*.json",
+      "*.md",
+      "*.sql"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Please perform the following git operations in sequence:\n\n1. Run `git add .` to stage all changes\n2. Generate an appropriate commit message following the conventional commit format specified in .kiro/steering/commit-messages.md, including:\n   - Appropriate emoji based on the type of changes\n   - Conventional commit type (feat, fix, docs, etc.)\n   - Scope if relevant\n   - Clear, imperative description under 50 characters\n   - Use the guidelines and examples from the commit-messages.md file\n3. Run `git commit -m \"[generated message]\"` with the generated message\n4. Run `git push` to push changes to remote\n\nAnalyze the staged changes to determine the most appropriate commit type and generate a meaningful commit message that follows the established guidelines."
+  }
+}

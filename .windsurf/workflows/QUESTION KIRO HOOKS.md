@@ -1,0 +1,4 @@
+---
+description: Analyzes all files in the .kiro/hooks directory and creates a summary of automated workflows
+---
+Please analyze all files in the .kiro/hooks directory. Create or update a file named PITCH/HOOKS.txt that answers: "For agent hooks: What specific workflows did you automate with Kiro hooks? How did these hooks improve your development process?" Format the output as plain text with clear sections and examples of the most valuable hooks.

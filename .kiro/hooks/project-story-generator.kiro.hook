@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "name": "CREATE DEVPOST PITCH",
+  "description": "Monitors changes to key project files and generates a DEVPOST.md file with inspiration, what it does, how it was built, challenges, accomplishments, learnings, next steps, tech stack, project name, and elevator pitch",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      "README.md",
+      "package.json",
+      "src/App.tsx",
+      "src/components/*.tsx",
+      "supabase/migrations/*.sql"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analyze the project structure and codebase to create or update a comprehensive `PITCH/DEVPOST.md`, file that answers these questions:\n\n## Inspiration\n## What it does\n## How we built it\n## Challenges we ran into\n## Accomplishments that we're proud of\n## What we learned\n## What's next for Untitled\n## Built with\n## Project Name(60 characters max)\n## Elevator pitch(200 characters max)\n\nBased on the file structure, this appears to be a React/TypeScript application with Supabase backend for course management. Examine the components, database migrations, and overall architecture to craft a compelling project story that highlights the technical achievements and user value proposition."
+  }
+}
