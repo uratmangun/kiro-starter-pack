@@ -1,0 +1,307 @@
+# Windsurf Workflow Schema
+
+## Overview
+Windsurf workflows are Markdown files that define step-by-step instructions for automated tasks. They use YAML frontmatter for metadata and Markdown content for the actual workflow instructions.
+
+## File Structure
+- **Location**: `.windsurf/workflows/` directory
+- **Extension**: `.md` (Markdown)
+- **Naming**: UPPERCASE with hyphens (e.g., `AUTO-README-GENERATOR.md`)
+- **Format**: YAML frontmatter + Markdown content
+
+## Schema Structure
+
+```markdown
+---
+description: string
+---
+[workflow instructions in markdown]
+```
+
+## Frontmatter Schema
+
+### Required Fields
+
+#### `description` (required)
+- **Type**: `string`
+- **Description**: Brief explanation of what the workflow does
+- **Format**: Should be a complete sentence describing the workflow's purpose
+- **Length**: Typically 50-150 characters
+- **Example**: `"Automatically generates or updates the README.md file by analyzing the project structure"`
+
+### Optional Fields (Future Extensions)
+The schema is designed to be extensible. Potential future fields include:
+
+#### `version` (optional)
+- **Type**: `string`
+- **Description**: Version identifier for the workflow
+- **Example**: `"1.0.0"`
+
+#### `author` (optional)
+- **Type**: `string`
+- **Description**: Creator of the workflow
+- **Example**: `"username"`
+
+#### `tags` (optional)
+- **Type**: `string[]`
+- **Description**: Tags for categorizing workflows
+- **Example**: `["git", "automation", "documentation"]`
+
+#### `dependencies` (optional)
+- **Type**: `string[]`
+- **Description**: Required tools or dependencies
+- **Example**: `["git", "node", "pnpm"]`
+
+## Content Structure
+
+### Basic Format
+The content section contains the actual workflow instructions written in Markdown format.
+
+### Content Types
+
+#### 1. Step-by-Step Instructions
+Most common format with numbered or bulleted steps:
+
+```markdown
+1. First step description
+2. Second step description
+3. Third step description
+```
+
+#### 2. Contextual Instructions
+Instructions that provide context and then specific actions:
+
+```markdown
+You are a [role] that will [purpose].
+
+[Detailed instructions with context]
+
+[Specific steps to execute]
+```
+
+#### 3. Template-Based Instructions
+Instructions that include templates or examples:
+
+```markdown
+Generate a [output] following this format:
+
+```
+[template or example]
+```
+
+[Additional instructions]
+```
+
+### Special Annotations
+
+#### `// turbo` Annotation
+- **Purpose**: Marks a single step for auto-execution
+- **Placement**: Line immediately above the step
+- **Effect**: Enables `SafeToAutoRun: true` for that step only
+- **Example**:
+```markdown
+1. Check git status
+// turbo
+2. Stage all changes
+3. Create commit message
+```
+
+#### `// turbo-all` Annotation
+- **Purpose**: Marks entire workflow for auto-execution
+- **Placement**: Anywhere in the workflow content
+- **Effect**: Enables `SafeToAutoRun: true` for ALL steps involving `run_command`
+- **Example**:
+```markdown
+---
+description: Auto-deploy workflow
+---
+// turbo-all
+
+1. Build the project
+2. Run tests
+3. Deploy to production
+```
+
+## Workflow Categories
+
+### 1. Documentation Workflows
+- **Purpose**: Generate or update documentation
+- **Naming Pattern**: `*-GENERATOR.md`, `CREATE-*-PITCH.md`
+- **Examples**: `AUTO-README-GENERATOR.md`, `CREATE-DEVPOST-PITCH.md`
+
+### 2. Git Automation Workflows
+- **Purpose**: Automate git operations
+- **Naming Pattern**: `GIT-*.md`
+- **Examples**: `GIT-PUSH-AUTO.md`
+
+### 3. Analysis Workflows
+- **Purpose**: Analyze project or code structure
+- **Naming Pattern**: `QUESTION-*.md`
+- **Examples**: `QUESTION-KIRO-VIBE.md`, `QUESTION-KIRO-SPECS.md`
+
+### 4. Project Setup Workflows
+- **Purpose**: Initialize or configure projects
+- **Naming Pattern**: `CREATE-PROJECT-*.md`
+- **Examples**: `CREATE-PROJECT-FROM-KIRO-STARTER-PACK.md`
+
+### 5. Conversion Workflows
+- **Purpose**: Convert between different formats
+- **Naming Pattern**: `*-TO-*-CONVERTER.md`
+- **Examples**: `KIRO-TO-WINDSURF-CONVERTER.md`
+
+### 6. License and Legal Workflows
+- **Purpose**: Handle legal and licensing tasks
+- **Naming Pattern**: `CREATE-*-LICENSE*.md`
+- **Examples**: `CREATE-OSI-LICENSE-AUTO.md`
+
+## Content Best Practices
+
+### Instruction Writing
+- Use clear, actionable language
+- Number steps for sequential workflows
+- Include context and purpose
+- Specify expected outputs
+- Include error handling when relevant
+
+### Formatting Guidelines
+- Use proper Markdown syntax
+- Include code blocks for templates
+- Use headers for major sections
+- Use lists for multiple items
+- Include examples when helpful
+
+### Command Integration
+- Workflows can trigger `run_command` tool calls
+- Use `// turbo` for safe auto-execution
+- Be explicit about command requirements
+- Include working directory context
+
+## Slash Command Integration
+
+### Command Format
+Workflows are accessible via slash commands:
+- **Pattern**: `/WORKFLOW-NAME`
+- **Example**: `/AUTO-README-GENERATOR` triggers `AUTO-README-GENERATOR.md`
+
+### Command Registration
+Workflows are automatically registered as slash commands based on filename:
+- Filename: `GIT-PUSH-AUTO.md`
+- Slash command: `/GIT-PUSH-AUTO`
+
+## Example Workflows
+
+### Simple Analysis Workflow
+```markdown
+---
+description: Creates a response about project development process
+---
+Create a comprehensive response about the project development process including:
+
+1. Development methodology used
+2. Key milestones achieved
+3. Challenges encountered and solutions
+4. Lessons learned
+
+Format this as plain text and save to ANALYSIS.txt.
+```
+
+### Complex Automation Workflow
+```markdown
+---
+description: Automatically stages changes, commits, and pushes to remote
+---
+You are a Git automation assistant that will handle the complete git workflow.
+
+// turbo-all
+
+1. Run 'git status' to check current state
+2. Stage all changes with 'git add .'
+3. Generate conventional commit message with emoji
+4. Commit changes with generated message
+5. Push to remote repository
+6. Report results
+
+Follow conventional commit format:
+```
+<emoji> <type>(<scope>): <description>
+```
+
+Execute these steps and provide a summary.
+```
+
+### Interactive Workflow
+```markdown
+---
+description: Guides user through project setup process
+---
+I'll help you set up a new project. Please provide the following information:
+
+1. Project name
+2. Project type (web app, API, library, etc.)
+3. Technology stack preferences
+4. Target deployment platform
+
+Based on your responses, I'll:
+- Create the project structure
+- Set up configuration files
+- Initialize version control
+- Create initial documentation
+
+What would you like to name your project?
+```
+
+## Migration from Kiro Hooks
+
+### Structural Differences
+| Aspect | Kiro Hooks | Windsurf Workflows |
+|--------|------------|-------------------|
+| Format | JSON | YAML frontmatter + Markdown |
+| Triggers | File patterns | Manual/slash commands |
+| Actions | Agent prompts | Step-by-step instructions |
+| Automation | Event-driven | User-initiated |
+
+### Conversion Process
+1. Extract `name` and `description` from Kiro hook
+2. Convert `description` to frontmatter
+3. Transform `prompt` to Markdown instructions
+4. Add appropriate formatting and structure
+5. Include turbo annotations if needed
+
+## Validation Rules
+
+### Frontmatter Validation
+- Must contain valid YAML
+- `description` field is required
+- Description should be descriptive and complete
+
+### Content Validation
+- Must be valid Markdown
+- Should contain actionable instructions
+- Steps should be clear and sequential
+- Code blocks should be properly formatted
+
+### Filename Validation
+- Must end with `.md`
+- Should use UPPERCASE with hyphens
+- Should be descriptive of the workflow purpose
+- Must be unique within the workflows directory
+
+## Integration Notes
+
+### With Windsurf IDE
+- Workflows appear as slash commands in the IDE
+- Can be triggered manually by users
+- Support auto-execution with turbo annotations
+- Integrate with file system and terminal operations
+
+### With AI Agents
+- Workflows provide structured prompts to AI agents
+- Support complex multi-step operations
+- Can include context and examples
+- Enable consistent automation patterns
+
+### Performance Considerations
+- Workflows are loaded on-demand
+- Turbo annotations should be used carefully
+- Complex workflows may require user confirmation
+- File operations should be explicit and safe

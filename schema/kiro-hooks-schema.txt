@@ -1,0 +1,228 @@
+# Kiro Hooks Schema
+
+## Overview
+Kiro hooks are JSON configuration files that define automated workflows triggered by file changes or user actions. They follow a specific schema structure to enable consistent automation across projects.
+
+## File Naming Convention
+- Files must end with `.kiro.hook` extension
+- Typically stored in `.kiro/hooks/` directory
+- Use kebab-case naming (e.g., `auto-readme-generator.kiro.hook`)
+
+## Schema Structure
+
+```json
+{
+  "enabled": boolean,
+  "name": string,
+  "description": string,
+  "version": string,
+  "when": {
+    "type": string,
+    "patterns": string[]
+  },
+  "then": {
+    "type": string,
+    "prompt": string
+  }
+}
+```
+
+## Field Definitions
+
+### Root Level Fields
+
+#### `enabled` (required)
+- **Type**: `boolean`
+- **Description**: Whether the hook is active and should be executed
+- **Example**: `true` or `false`
+
+#### `name` (required)
+- **Type**: `string`
+- **Description**: Human-readable name for the hook, typically in UPPERCASE
+- **Format**: Should be descriptive and unique
+- **Example**: `"AUTO README GENERATOR"`, `"GIT PUSH AUTO"`
+
+#### `description` (required)
+- **Type**: `string`
+- **Description**: Brief explanation of what the hook does
+- **Format**: Should be a complete sentence describing the hook's purpose
+- **Example**: `"Automatically generates or updates the README.md file by analyzing the project structure"`
+
+#### `version` (required)
+- **Type**: `string`
+- **Description**: Version identifier for the hook
+- **Format**: Typically a simple number or semantic version
+- **Example**: `"1"`, `"1.0.0"`
+
+### `when` Object (required)
+Defines the trigger conditions for the hook.
+
+#### `when.type` (required)
+- **Type**: `string`
+- **Description**: The type of trigger mechanism
+- **Allowed Values**:
+  - `"userTriggered"`: Hook is triggered by user action or file changes
+- **Example**: `"userTriggered"`
+
+#### `when.patterns` (required)
+- **Type**: `string[]`
+- **Description**: Array of glob patterns that define which files trigger the hook
+- **Format**: Uses glob pattern syntax
+- **Examples**:
+  - `["*"]` - Matches all files
+  - `["**/*.js", "**/*.ts"]` - Matches JavaScript and TypeScript files
+  - `[".kiro/specs/**/*"]` - Matches files in .kiro/specs directory
+  - `["**/package.json"]` - Matches package.json files anywhere
+
+### `then` Object (required)
+Defines the action to take when the hook is triggered.
+
+#### `then.type` (required)
+- **Type**: `string`
+- **Description**: The type of action to execute
+- **Allowed Values**:
+  - `"askAgent"`: Sends a prompt to an AI agent for processing
+- **Example**: `"askAgent"`
+
+#### `then.prompt` (required)
+- **Type**: `string`
+- **Description**: The prompt or instructions to send to the AI agent
+- **Format**: Should be detailed and specific about what the agent should do
+- **Best Practices**:
+  - Include numbered steps for complex workflows
+  - Specify output format requirements
+  - Include examples when helpful
+  - Be explicit about file operations (create, update, analyze)
+
+## Pattern Examples
+
+### File Type Patterns
+```json
+"patterns": [
+  "**/*.js",      // All JavaScript files
+  "**/*.ts",      // All TypeScript files
+  "**/*.jsx",     // React JSX files
+  "**/*.tsx",     // React TypeScript files
+  "**/*.md",      // Markdown files
+  "**/*.json",    // JSON files
+  "**/*.sql",     // SQL files
+  "**/*.toml"     // TOML files
+]
+```
+
+### Directory Patterns
+```json
+"patterns": [
+  ".kiro/specs/**/*",    // All files in .kiro/specs
+  "supabase/**",         // All files in supabase directory
+  "src/**/*.ts"          // TypeScript files in src directory
+]
+```
+
+### Specific File Patterns
+```json
+"patterns": [
+  "**/package.json",     // package.json anywhere
+  "**/tsconfig.json",    // tsconfig.json anywhere
+  "README.md"            // README.md in root
+]
+```
+
+### Universal Pattern
+```json
+"patterns": ["*"]        // Matches any file change
+```
+
+## Common Hook Types
+
+### 1. Documentation Generators
+- **Purpose**: Auto-generate or update documentation
+- **Triggers**: Code files, config files, markdown files
+- **Example**: README generators, API documentation
+
+### 2. Git Automation
+- **Purpose**: Automate git operations
+- **Triggers**: Any file changes
+- **Example**: Auto-commit, auto-push workflows
+
+### 3. Analysis Hooks
+- **Purpose**: Analyze project structure or files
+- **Triggers**: Specific directories or file types
+- **Example**: Spec analysis, project structure analysis
+
+### 4. License and Legal
+- **Purpose**: Maintain legal compliance
+- **Triggers**: Project configuration changes
+- **Example**: License file generation
+
+### 5. Project Setup
+- **Purpose**: Initialize or configure projects
+- **Triggers**: Template or configuration files
+- **Example**: Project creation from templates
+
+## Best Practices
+
+### Naming Conventions
+- Use descriptive, action-oriented names
+- Use UPPERCASE for the `name` field
+- Use kebab-case for filenames
+- Include the purpose in the description
+
+### Pattern Design
+- Be specific with patterns to avoid unnecessary triggers
+- Use `**/*` for recursive directory matching
+- Combine multiple patterns when monitoring different file types
+- Consider performance impact of broad patterns
+
+### Prompt Engineering
+- Be explicit about expected outputs
+- Include step-by-step instructions for complex tasks
+- Specify file formats and naming conventions
+- Include error handling instructions
+- Provide examples when helpful
+
+### Version Management
+- Start with version "1" for new hooks
+- Increment version when making breaking changes
+- Document version changes in comments if needed
+
+## Example Complete Hook
+
+```json
+{
+  "enabled": true,
+  "name": "PROJECT ANALYZER",
+  "description": "Analyzes project structure and generates insights about architecture and dependencies",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      "**/package.json",
+      "**/tsconfig.json",
+      "src/**/*.ts",
+      "src/**/*.js"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analyze the project structure and create a comprehensive analysis including:\n1. Architecture overview\n2. Dependency analysis\n3. Code organization patterns\n4. Potential improvements\n\nOutput the analysis to PROJECT_ANALYSIS.md with proper formatting and sections."
+  }
+}
+```
+
+## Integration Notes
+
+### With Windsurf Workflows
+- Kiro hooks can be converted to Windsurf workflows
+- Use the kiro-to-windsurf-converter for migration
+- Maintain compatibility between both systems
+
+### File System Monitoring
+- Hooks monitor file system changes based on patterns
+- Changes trigger the associated prompts
+- Multiple hooks can be triggered by the same file change
+
+### Agent Integration
+- All hooks currently use "askAgent" type
+- Prompts are sent to AI agents for processing
+- Agents have access to project context and file system
