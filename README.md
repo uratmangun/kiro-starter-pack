@@ -28,17 +28,26 @@ Automated workflows that trigger based on project changes:
 ### 🛠️ Windsurf Workflows (`.windsurf/workflows/`)
 Pre-built workflows accessible via slash commands:
 
-- `/AUTO-README-GENERATOR` - Generate or update README files
-- `/CREATE-AKINDO-PITCH` - Create comprehensive pitch documents  
-- `/CREATE-DEVPOST-PITCH` - Generate DevPost submissions
-- `/CREATE-KIRO-USAGE-AUTO` - Document Kiro usage patterns
-- `/CREATE-OSI-LICENSE-AUTO` - Create open-source licenses
-- `/CREATE-PROJECT-FROM-KIRO-STARTER-PACK` - Create new projects from template
-- `/GIT-PUSH-AUTO` - Automated git operations with conventional commits
-- `/KIRO-TO-WINDSURF-CONVERTER` - Convert Kiro hooks to Windsurf workflows
-- `/QUESTION-KIRO-HOOKS` - Analyze and understand Kiro hooks
-- `/QUESTION-KIRO-SPECS` - Analyze spec-driven development patterns
-- `/QUESTION-KIRO-VIBE` - Understand project conversation patterns
+- `/AUTO-README-GENERATOR` - Automatically generates or updates README.md files by analyzing project structure
+- `/CREATE-AKINDO-PITCH` - Monitors project files and automatically generates comprehensive AKINDO pitch documents
+- `/CREATE-DEVPOST-PITCH` - Monitors changes and generates DEVPOST.md with inspiration, tech stack, and project details
+- `/CREATE-KIRO-USAGE-AUTO` - Automatically creates or updates HOW_KIRO_WAS_USED.md documentation when .kiro files are modified
+- `/CREATE-OSI-LICENSE-AUTO` - Automatically creates or updates OSI-compliant license files when project config changes
+- `/CREATE-PROJECT-FROM-KIRO-STARTER-PACK` - Automatically creates new projects using the kiro-starter-pack GitHub template
+- `/GIT-PUSH-AUTO` - Automatically stages changes, generates conventional commit messages with emojis, and pushes to remote
+- `/KIRO-TO-WINDSURF-CONVERTER` - Converts .kiro/hooks files to .windsurf/workflows markdown files with proper formatting
+- `/QUESTION-KIRO-HOOKS` - Analyzes all files in .kiro/hooks directory and creates workflow summaries
+- `/QUESTION-KIRO-SPECS` - Analyzes spec structure in .kiro/specs and updates PITCH/SPECS.txt with insights
+- `/QUESTION-KIRO-VIBE` - Creates responses about project conversation patterns and code generation examples
+- `/WINDSURF-TO-KIRO-CONVERTER` - Converts Windsurf workflow markdown files to Kiro hooks JSON format
+
+### 📋 AI Schema Documentation (`ai-schema/`)
+Schema definitions and specifications for automation systems:
+
+- **`kiro-hooks-schema.txt`** - Complete schema specification for Kiro hooks JSON configuration files, including structure, triggers, and automation patterns
+- **`windsurf-workflow-schema.txt`** - Schema specification for Windsurf workflow markdown files, covering YAML frontmatter and instruction formatting
+
+These schema files serve as reference documentation for creating and converting between Kiro hooks and Windsurf workflows, ensuring consistent automation patterns across projects.
 
 ### ⚙️ Development Standards (`.kiro/steering/`)
 Predefined configurations for consistent development:
