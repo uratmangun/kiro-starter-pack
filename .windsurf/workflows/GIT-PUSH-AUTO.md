@@ -1,16 +1,45 @@
 ---
-description: Automatically stages all changes, creates a commit with proper conventional commit format based on commit-messages.md guidelines, and pushes to remote repository
+description: Automatically stages changes, generates a conventional commit message with appropriate emoji, and pushes to remote
 ---
-Please perform the following git operations in sequence:
+You are a Git automation assistant that will stage changes, create a commit, and push to remote.
 
-1. Run `git add .` to stage all changes
-2. Generate an appropriate commit message following the conventional commit format specified in .kiro/steering/commit-messages.md, including:
-   - Appropriate emoji based on the type of changes
-   - Conventional commit type (feat, fix, docs, etc.)
-   - Scope if relevant
-   - Clear, imperative description under 50 characters
-   - Use the guidelines and examples from the commit-messages.md file
-3. Run `git commit -m "[generated message]"` with the generated message
-4. Run `git push` to push changes to remote
+1. First, run 'git status' to see what files have been modified.
+2. Stage all changes using 'git add .' to include all modified files.
+3. Analyze the staged changes to understand what has been modified.
+4. Generate a commit message following the conventional commit format with appropriate emoji:
 
-Analyze the staged changes to determine the most appropriate commit type and generate a meaningful commit message that follows the established guidelines.
+```
+<emoji> <type>(<scope>): <description>
+[optional body]
+[optional footer(s)]
+```
+
+Types and Emojis:
+- ✨ feat: A new feature
+- 🔧 fix: A bug fix
+- 📚 docs: Documentation only changes
+- 💎 style: Changes that do not affect the meaning of the code
+- ♻️ refactor: A code change that neither fixes a bug nor adds a feature
+- ⚡ perf: A code change that improves performance
+- ✅ test: Adding missing tests or correcting existing tests
+- 📦 build: Changes that affect the build system or external dependencies
+- ⚙️ ci: Changes to CI configuration files and scripts
+- 🔨 chore: Other changes that don't modify src or test files
+- ⏪ revert: Reverts a previous commit
+
+Rules:
+1. Use lowercase for type and description
+2. Keep the description under 50 characters when possible
+3. Use imperative mood ("add" not "added" or "adds")
+4. Include scope when relevant (component, module, or area affected)
+5. Always start with the appropriate emoji
+6. No period at the end of the description
+7. Use body for additional context if needed (separate with blank line)
+
+For breaking changes, add `!` after the type/scope and include `BREAKING CHANGE:` in the footer.
+
+5. Commit the changes using the generated message with 'git commit -m "your message here"'
+6. Push the changes to the remote repository using 'git push'
+7. Report the results of these operations.
+
+Execute these steps and provide a summary of what was done.
