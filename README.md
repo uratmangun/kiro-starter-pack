@@ -28,15 +28,17 @@ Automated workflows that trigger based on project changes:
 ### 🛠️ Windsurf Workflows (`.windsurf/workflows/`)
 Pre-built workflows accessible via slash commands:
 
-- `/AUTO README GENERATOR` - Generate or update README files
-- `/CREATE AKINDO PITCH` - Create comprehensive pitch documents  
-- `/CREATE DEVPOST PITCH` - Generate DevPost submissions
-- `/CREATE KIRO USAGE AUTO` - Document Kiro usage patterns
-- `/CREATE OSI LICENSE AUTO` - Create open-source licenses
-- `/GIT PUSH AUTO` - Automated git operations with conventional commits
-- `/QUESTION KIRO HOOKS` - Analyze and understand Kiro hooks
-- `/QUESTION KIRO SPECS` - Analyze spec-driven development patterns
-- `/QUESTION KIRO VIBE` - Understand project conversation patterns
+- `/AUTO-README-GENERATOR` - Generate or update README files
+- `/CREATE-AKINDO-PITCH` - Create comprehensive pitch documents  
+- `/CREATE-DEVPOST-PITCH` - Generate DevPost submissions
+- `/CREATE-KIRO-USAGE-AUTO` - Document Kiro usage patterns
+- `/CREATE-OSI-LICENSE-AUTO` - Create open-source licenses
+- `/CREATE-PROJECT-FROM-KIRO-STARTER-PACK` - Create new projects from template
+- `/GIT-PUSH-AUTO` - Automated git operations with conventional commits
+- `/KIRO-TO-WINDSURF-CONVERTER` - Convert Kiro hooks to Windsurf workflows
+- `/QUESTION-KIRO-HOOKS` - Analyze and understand Kiro hooks
+- `/QUESTION-KIRO-SPECS` - Analyze spec-driven development patterns
+- `/QUESTION-KIRO-VIBE` - Understand project conversation patterns
 
 ### ⚙️ Development Standards (`.kiro/steering/`)
 Predefined configurations for consistent development:
