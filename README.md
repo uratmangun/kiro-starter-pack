@@ -2,6 +2,10 @@
 
 A comprehensive starter template that combines the power of **Kiro** (AI-powered development workflows) and **Windsurf** (advanced AI coding assistant) to supercharge your development experience.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![AI-Powered](https://img.shields.io/badge/AI-Powered-blue.svg)](https://github.com/topics/artificial-intelligence)
+[![Automation](https://img.shields.io/badge/Automation-Ready-green.svg)](https://github.com/topics/automation)
+
 ## 🎯 What This Template Provides
 
 This starter pack sets up your project with pre-configured automation, workflows, and development standards that work seamlessly with both Kiro and Windsurf.

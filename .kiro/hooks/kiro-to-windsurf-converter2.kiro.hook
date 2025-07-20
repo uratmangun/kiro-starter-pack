@@ -1,10 +1,10 @@
 {
   "enabled": true,
-  "name": "KIRO TO WINDSURF CONVERTER",
+  "name": "KIRO TO WINDSURF CONVERTER 2",
   "description": "Converts .kiro/hooks files to .windsurf/workflows markdown files with the proper naming convention and content format",
   "version": "1",
   "when": {
-    "type": "fileCreated",
+    "type": "fileEdited",
     "patterns": [
       ".kiro/hooks/*"
     ]

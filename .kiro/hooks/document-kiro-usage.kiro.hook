@@ -14,6 +14,6 @@
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Create or update the `PITCH/HOW_KIRO_WAS_USED.md` file to document how Kiro AI was used in this project. Include:\n\n1. Overview of Kiro's role in development\n2. Spec-driven development process (analyze .kiro/specs/)\n3. Automated development hooks (analyze .kiro/hooks/)\n4. Development steering and guidelines (analyze .kiro/steering/)\n5. Key benefits and outcomes\n6. Specific features that were Kiro-assisted\n7. Development workflow improvements\n8. Time savings and quality improvements\n\nAnalyze the current .kiro configuration to provide accurate, up-to-date documentation of how Kiro contributed to the project. Make it comprehensive but readable for developers interested in AI-assisted development. "
+    "prompt": "Create or update the `PITCH/HOW_KIRO_WAS_USED.txt` file to document how Kiro AI was used in this project. Analyze .kiro/specs/, .kiro/hooks/, and .kiro/steering/ directories. Keep the summary to 500 characters maximum. Use plain text only, no markdown formatting. Focus on key Kiro features used, development workflow improvements, and time savings."
   }
 }

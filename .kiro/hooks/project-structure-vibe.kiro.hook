@@ -11,6 +11,6 @@
   },
   "then": {
     "type": "askAgent",
-    "prompt": "Create a comprehensive response about structuring conversations with Kiro for building projects from scratch. Include:\n\n1. How conversations were structured with Kiro to build the project effectively\n2. The workflow and communication patterns that worked best\n3. Examples of the most impressive code generation Kiro helped with\n4. Tips for others looking to build projects with AI assistance\n5. How the project structure evolved through the collaboration\n\nFormat this as plain text (no markdown) and save it to PITCH/VIBE.txt. The response should be general enough to serve as a boilerplate that others can use to answer similar questions about their own projects."
+    "prompt": "Create a response about structuring conversations with Kiro for building projects and save it to PITCH/VIBE.txt. Focus on effective workflow patterns, impressive code generation examples, and tips for AI-assisted development. Keep the answer to 500 characters maximum. Use plain text only, no markdown formatting."
   }
 }
