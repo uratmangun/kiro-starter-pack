@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "HOOK FILENAME SYNC",
+  "description": "Synchronizes hook filenames to match their internal 'name' values, converting spaces to dashes and ensuring uppercase format",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      ".kiro/hooks/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Please synchronize all hook filenames in the .kiro/hooks directory to match their internal 'name' values. For each .kiro.hook file:\n\n1. Read the JSON content of each hook file\n2. Extract the 'name' value from the JSON\n3. Convert the name to the proper filename format:\n   - Replace spaces with dashes\n   - Keep uppercase format\n   - Add .kiro.hook extension\n   - Example: \"GIT PUSH AUTO\" becomes \"GIT-PUSH-AUTO.kiro.hook\"\n4. If the current filename doesn't match the expected filename based on the name value, rename the file\n5. Report which files were renamed and their new names\n\nProcess all hook files in the .kiro/hooks directory and ensure consistency between internal names and filenames."
+  }
+}
