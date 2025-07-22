@@ -6,6 +6,27 @@ A comprehensive starter template that combines the power of **Kiro** (AI-powered
 [![AI-Powered](https://img.shields.io/badge/AI-Powered-blue.svg)](https://github.com/topics/artificial-intelligence)
 [![Automation](https://img.shields.io/badge/Automation-Ready-green.svg)](https://github.com/topics/automation)
 
+## 🚀 Quick Start
+
+### Clone as Template with GitHub CLI
+
+Create a new project using this template with a custom name:
+
+```fish
+# Clone this repository as a template with your project name
+gh repo create your-project-name --template uratmangun/kiro-starter-pack --public --clone
+
+# Navigate to your new project
+cd your-project-name
+```
+
+Or for a private repository:
+
+```fish
+gh repo create your-project-name --template uratmangun/kiro-starter-pack --private --clone
+cd your-project-name
+```
+
 ## 🎯 What This Template Provides
 
 This starter pack sets up your project with pre-configured automation, workflows, and development standards that work seamlessly with both Kiro and Windsurf.
