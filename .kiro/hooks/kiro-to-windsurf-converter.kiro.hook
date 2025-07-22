@@ -4,7 +4,7 @@
   "description": "Converts .kiro/hooks files to .windsurf/workflows markdown files with the proper naming convention and content format",
   "version": "1",
   "when": {
-    "type": "fileCreated",
+    "type": "userTriggered",
     "patterns": [
       ".kiro/hooks/*"
     ]
