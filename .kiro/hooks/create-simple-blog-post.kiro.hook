@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "CREATE SIMPLE BLOG POST",
+  "name": "CREATE DEVPOST BLOG ",
   "description": "Creates a simple blog post about the project by analyzing its structure, features, and purpose",
   "version": "1",
   "when": {

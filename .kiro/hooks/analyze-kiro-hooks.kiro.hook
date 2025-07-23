@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "QUESTION KIRO HOOKS",
+  "name": "CREATE DEVPOST KIRO HOOKS",
   "description": "Analyzes all files in the .kiro/hooks directory and creates a summary of automated workflows",
   "version": "1",
   "when": {

@@ -108,29 +108,28 @@ Create `tasks.md` with discrete, trackable tasks:
 
 Template structure:
 ```markdown
-# Implementation Tasks
+# Implementation Plan
 
-## Task Overview
-[Brief summary of implementation approach]
+- [ ] 1. [Task Name]
+  - [Brief description of what needs to be done]
+  - [Additional sub-task or detail]
+  - [Another implementation detail]
+  - [Any technical considerations]
+  - _Requirements: [X.X, Y.Y]_
 
-## Tasks
+- [ ] 2. [Second Task Name]
+  - [Brief description of second task]
+  - [Sub-task or implementation detail]
+  - [Technical specification or constraint]
+  - [Expected outcome or deliverable]
+  - _Requirements: [X.X, Z.Z]_
 
-### Task 1: [Task Name]
-**Status:** Not Started
-**Description:** [Clear description of what needs to be done]
-**Expected Outcome:** [What should be delivered]
-**Dependencies:** [Any prerequisite tasks]
-
-### Task 2: [Task Name]
-**Status:** Not Started
-**Description:** [Clear description of what needs to be done]
-**Expected Outcome:** [What should be delivered]
-**Dependencies:** [Any prerequisite tasks]
-
-[Continue with additional tasks...]
-
-## Implementation Notes
-[Any additional context or considerations]
+- [ ] 3. [Third Task Name]
+  - [Description of third task]
+  - [Implementation approach]
+  - [Dependencies or prerequisites]
+  - [Validation criteria]
+  - _Requirements: [Y.Y, Z.Z]_
 ```
 
 ## Step 6: Validate Specification

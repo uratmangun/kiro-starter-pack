@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "QUESTION KIRO SPECS",
+  "name": "CREATE DEVPOST KIRO SPECS",
   "description": "Analyzes the spec structure in .kiro/specs folder and updates PITCH/SPECS.txt with insights on spec-driven development",
   "version": "1",
   "when": {

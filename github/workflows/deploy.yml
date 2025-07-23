@@ -39,14 +39,12 @@ jobs:
           NODE_ENV: production
           
 
-      - name: Generate random project name
+      - name: Set project name from repository
         id: project_name
         run: |
-          RANDOM_LENGTH=$((5 + RANDOM % 28))
-          RANDOM_STRING=$(openssl rand -hex $((($RANDOM_LENGTH + 1) / 2)) | cut -c1-$RANDOM_LENGTH)
-          PROJECT_NAME="${RANDOM_STRING}"
+          PROJECT_NAME="${GITHUB_REPOSITORY##*/}"
           echo "project_name=${PROJECT_NAME}" >> $GITHUB_OUTPUT
-          echo "Generated project name: ${PROJECT_NAME}"
+          echo "Using repository name as project name: ${PROJECT_NAME}"
 
       - name: Create Cloudflare Pages project if not exists
         run: |

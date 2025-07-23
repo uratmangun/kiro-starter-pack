@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "QUESTION KIRO VIBE",
+  "name": "CREATE DEVPOST KIRO VIBE",
   "description": "Creates a response about how conversations with Kiro were structured to build the project and highlights impressive code generation examples",
   "version": "1",
   "when": {

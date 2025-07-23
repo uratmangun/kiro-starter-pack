@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "CREATE KIRO USAGE AUTO",
+  "name": "CREATE DEVPOST KIRO USAGE",
   "description": "Automatically create or update HOW_KIRO_WAS_USED.md documentation whenever .kiro configuration files are modified",
   "version": "1",
   "when": {
