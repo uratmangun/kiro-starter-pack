@@ -95,6 +95,14 @@ Follow the established workflow in `.windsurf/workflows/CREATE-KIRO-SPEC.md`:
 ```
 
 #### Task Quality
+
+**Critical Guidelines for tasks.md:**
+- Start directly with `# Implementation Plan` heading
+- Include ONLY the task list with checkboxes
+- NO introductory text, task overview, success criteria, or quality standards
+- Keep clean and focused on actionable tasks only
+- Use requirement references at the end of each task
+
 ```markdown
 // Good task definition (Implementation Plan format):
 # Implementation Plan

@@ -98,13 +98,14 @@ Template structure:
 
 ## Step 5: Create Implementation Plan
 
-Create `tasks.md` with discrete, trackable tasks:
+Create `tasks.md` with ONLY the implementation plan - no extra text, headers, or explanations:
 
-1. **Task Breakdown**: Divide work into manageable, independent tasks
-2. **Task Descriptions**: Clear, actionable descriptions
-3. **Expected Outcomes**: Define what "done" looks like for each task
-4. **Dependencies**: Identify task dependencies and order
-5. **Status Tracking**: Include status indicators (Not Started, In Progress, Completed)
+**Important Guidelines:**
+- Start directly with `# Implementation Plan` heading
+- Include only the task list with checkboxes
+- No introductory text, task overview, success criteria, or quality standards
+- Keep it clean and focused on actionable tasks only
+- Use requirement references at the end of each task
 
 Template structure:
 ```markdown

@@ -1,7 +1,7 @@
 ---
 trigger: glob
-description: "Applies Supabase migration standards for SQL migration files"
-globs: "supabase/migrations/**/*.sql"
+description: "Applies Supabase migration standards for config.toml files"
+globs: "supabase/config.toml"
 ---
 
 # Supabase Migration Standards

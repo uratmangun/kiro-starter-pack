@@ -27,25 +27,142 @@ You are a rule conversion specialist that converts Kiro steering files to Windsu
       - Keep the same filename (e.g., `shell-preferences.md`)
       - **Convert YAML frontmatter** from Kiro format to Windsurf rules format:
         
-        **From Kiro format:**
-        ```yaml
-        ---
-        inclusion: always
-        ---
-        ```
-        
-        **To Windsurf rules format:**
+        **For `inclusion: always`:**
         ```yaml
         ---
         name: "[Descriptive Rule Name]"
-        activation_mode: "always_on"  # since inclusion: always
+        trigger: always_on
         description: "[Natural language description of the rule's purpose]"
         ---
         ```
         
+        **For `inclusion: fileMatch` with patterns:**
+        Create separate rule files for each glob pattern:
+        ```yaml
+        ---
+        trigger: glob
+        description: "[Natural language description of the rule's purpose for pattern1]"
+        globs: "pattern1"
+        ---
+        ```
+        
+        ```yaml
+        ---
+        trigger: glob
+        description: "[Natural language description of the rule's purpose for pattern2]"
+        globs: "pattern2"
+        ---
+        ```
+        ```
+        
+        **Glob Pattern Examples:**
+        
+        Basic File Extension Patterns:
+        ```yaml
+        ---
+        trigger: glob
+        description: "JavaScript development standards"
+        globs: "*.js"
+        ---
+        ```
+        ```yaml
+        ---
+        trigger: glob
+        description: "Python coding guidelines"
+        globs: "*.py"
+        ---
+        ```
+        ```yaml
+        ---
+        trigger: glob
+        description: "TypeScript development rules"
+        globs: "*.ts"
+        ---
+        ```
+        ```yaml
+        ---
+        trigger: glob
+        description: "Documentation formatting standards"
+        globs: "*.md"
+        ---
+        ```
+        
+        Directory-based Patterns:
+        ```yaml
+        ---
+        trigger: glob
+        description: "Source code TypeScript standards"
+        globs: "src/**/*.ts"
+        ---
+        ```
+        ```yaml
+        ---
+        trigger: glob
+        description: "Test file Python standards"
+        globs: "tests/*.py"
+        ---
+        ```
+        ```yaml
+        ---
+        trigger: glob
+        description: "Documentation standards"
+        globs: "docs/**/*.md"
+        ---
+        ```
+        
+        Complex Pattern Examples:
+        ```yaml
+        ---
+        trigger: glob
+        description: "Source code development standards"
+        globs: "src/**/*.{js,ts,py}"
+        ---
+        ```
+        
+        Example for Supabase config (create separate files):
+        
+        File: `supabase-directory.md`
+        ```yaml
+        ---
+        trigger: glob
+        description: "Applies Supabase project configuration rules for files in supabase directory"
+        globs: "supabase/**/*"
+        ---
+        ```
+        
+        File: `supabase-config-files.md`
+        ```yaml
+        ---
+        trigger: glob
+        description: "Applies Supabase project configuration rules for supabase.toml files"
+        globs: "**/supabase.toml"
+        ---
+        ```
+        
+        File: `config-toml-files.md`
+        ```yaml
+        ---
+        trigger: glob
+        description: "Applies Supabase project configuration rules for config.toml files"
+        globs: "**/config.toml"
+        ---
+        ```
+        
+        **How Glob Triggers Work:**
+        - **Purpose**: The rule will be applied to all files that match the specified pattern
+        - **Activation**: File-pattern-based activation
+        - **Use case**: When you want a rule to apply only to specific types of files or files in certain directories
+        - **Multiple patterns**: For multiple file types, create separate rules for different patterns or use brace expansion syntax
+        
       - Generate appropriate `name` based on file content and purpose
-      - Set `activation_mode` to "always_on" for files with `inclusion: always`
-      - Create meaningful `description` summarizing the rule's function
+      - For `inclusion: always`:
+        - Set `trigger: "always_on"`
+        - Set `name` and `description` fields
+      - For `inclusion: fileMatch`:
+        - Set `trigger: "glob"`
+        - Convert `fileMatchPattern` array to `globs` array
+        - Set `description` field
+      - Create meaningful descriptions summarizing the rule's function
       - Maintain all content formatting and examples
       - Ensure code blocks and syntax highlighting remain intact
    
@@ -86,7 +203,7 @@ inclusion: always
 ```yaml
 ---
 name: "Fish Shell Execution Standards"
-activation_mode: "always_on"
+trigger: "always_on"
 description: "Enforces fish shell syntax for all terminal commands and provides conversion patterns from bash"
 ---
 ```
@@ -102,7 +219,7 @@ inclusion: always
 ```yaml
 ---
 name: "Kiro Specification Generation Requirements"
-activation_mode: "always_on"
+trigger: "always_on"
 description: "Mandates creation of comprehensive Kiro specifications for all development plans following the three-file format"
 ---
 ```
@@ -118,7 +235,7 @@ inclusion: always
 ```yaml
 ---
 name: "Supabase Function Deployment Process"
-activation_mode: "always_on"
+trigger: "always_on"
 description: "Defines the standard process for deploying Supabase functions using Docker container operations"
 ---
 ```
@@ -129,8 +246,8 @@ After conversion:
 - Compare file counts between source and target directories
 - Spot-check converted files for content accuracy
 - Verify YAML frontmatter is properly converted to Windsurf format
-- Ensure all rules have proper `name`, `activation_mode`, and `description` fields
-- Validate that `activation_mode` is set to "always_on" for files with `inclusion: always`
+- Ensure all rules have proper `name`, `trigger`, and `description` fields
+- Validate that `trigger` is set to "always_on" for files with `inclusion: always`
 - Ensure code examples and formatting remain intact
 - Test that rules are properly recognized by Windsurf
 

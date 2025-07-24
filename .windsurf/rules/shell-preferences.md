@@ -1,6 +1,6 @@
 ---
 name: "Fish Shell Execution Standards"
-activation_mode: "always_on"
+trigger: always_on
 description: "Enforces fish shell syntax for all terminal commands and provides conversion patterns from bash"
 ---
 
@@ -21,7 +21,7 @@ description: "Enforces fish shell syntax for all terminal commands and provides 
 
 ```fish
 # Variable assignment
-set PROJECT_ID (grep '^project_id' config.toml | cut -d'"' -f2)
+set PROJECT_ID (grep "^project_id" config.toml | cut -d"\"" -f2)
 
 # Conditional execution
 if test -f file.txt; echo "exists"; end
@@ -51,7 +51,7 @@ Use these patterns for common project operations:
 set CONTAINER_ID (docker ps --filter "name=pattern" --format "{{.ID}}")
 
 # Configuration reading
-set CONFIG_VALUE (grep '^key' config.file | cut -d'"' -f2)
+set CONFIG_VALUE (grep "^key" config.file | cut -d"\"" -f2)
 
 # Conditional container operations
 if test -n "$CONTAINER_ID"
