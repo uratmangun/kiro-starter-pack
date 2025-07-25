@@ -17,6 +17,55 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create Cloudflare Pages Project if not exists
+        run: |
+          PROJECT_NAME="${{ vars.CLOUDFLARE_PROJECT_NAME || 'kiro-starter-pack' }}"
+          
+          # Check if project exists
+          RESPONSE=$(curl -s -w "%{http_code}" -o /tmp/cf_response.json \
+            -X GET "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects/${PROJECT_NAME}" \
+            -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+            -H "Content-Type: application/json")
+          
+          HTTP_CODE=${RESPONSE: -3}
+          
+          if [ "$HTTP_CODE" = "404" ]; then
+            echo "Project ${PROJECT_NAME} not found. Creating new project..."
+            
+            # Create new project
+            CREATE_RESPONSE=$(curl -s -w "%{http_code}" -o /tmp/cf_create_response.json \
+              -X POST "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects" \
+              -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              -d "{
+                \"name\": \"${PROJECT_NAME}\",
+                \"production_branch\": \"main\",
+                \"build_config\": {
+                  \"build_command\": \"\",
+                  \"destination_dir\": \".\",
+                  \"root_dir\": \".\"
+                }
+              }")
+            
+            CREATE_HTTP_CODE=${CREATE_RESPONSE: -3}
+            
+            if [ "$CREATE_HTTP_CODE" = "200" ] || [ "$CREATE_HTTP_CODE" = "201" ]; then
+              echo "✅ Successfully created Cloudflare Pages project: ${PROJECT_NAME}"
+              cat /tmp/cf_create_response.json | jq '.result.subdomain' || echo "Project created successfully"
+            else
+              echo "❌ Failed to create project. HTTP Code: $CREATE_HTTP_CODE"
+              cat /tmp/cf_create_response.json || echo "No response body"
+              exit 1
+            fi
+          elif [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ Project ${PROJECT_NAME} already exists"
+            cat /tmp/cf_response.json | jq '.result.subdomain' || echo "Project found"
+          else
+            echo "❌ Unexpected response when checking project. HTTP Code: $HTTP_CODE"
+            cat /tmp/cf_response.json || echo "No response body"
+            exit 1
+          fi
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         id: cloudflare-deploy
