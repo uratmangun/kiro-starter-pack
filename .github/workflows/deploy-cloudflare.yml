@@ -1,0 +1,89 @@
+name: Deploy to Cloudflare Pages and Update Homepage
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'index.html'
+      - '.github/workflows/deploy-cloudflare.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to Cloudflare Pages
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        id: cloudflare-deploy
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ vars.CLOUDFLARE_PROJECT_NAME || 'kiro-starter-pack' }}
+          directory: .
+          gitHubToken: ${{ secrets.ADMIN_TOKEN }}
+
+      - name: Update Repository Homepage URL
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.ADMIN_TOKEN }}
+          script: |
+            const deploymentUrl = '${{ steps.cloudflare-deploy.outputs.url }}';
+            
+            if (deploymentUrl && deploymentUrl !== '') {
+              try {
+                await github.rest.repos.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  homepage: deploymentUrl,
+                  description: '🚀 Kiro & Windsurf Starter Pack - AI-Powered Development Template'
+                });
+                
+                console.log(`✅ Repository homepage updated to: ${deploymentUrl}`);
+              } catch (error) {
+                console.error('❌ Failed to update repository homepage:', error);
+                core.setFailed(`Failed to update homepage: ${error.message}`);
+              }
+            } else {
+              console.log('⚠️ No deployment URL found, skipping homepage update');
+            }
+
+      - name: Comment on PR with deployment URL
+        if: github.event_name == 'pull_request' && success()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.ADMIN_TOKEN }}
+          script: |
+            const deploymentUrl = '${{ steps.cloudflare-deploy.outputs.url }}';
+            
+            if (deploymentUrl && deploymentUrl !== '') {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `🚀 **Cloudflare Pages Deployment**\n\n✅ Successfully deployed to: ${deploymentUrl}\n\n📝 Preview your changes at the link above!`
+              });
+            }
+
+      - name: Create deployment status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.ADMIN_TOKEN }}
+          script: |
+            const deploymentUrl = '${{ steps.cloudflare-deploy.outputs.url }}';
+            const state = '${{ job.status }}' === 'success' ? 'success' : 'failure';
+            
+            await github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: context.payload.deployment?.id || 0,
+              state: state,
+              environment_url: deploymentUrl || '',
+              description: state === 'success' ? 'Deployment succeeded' : 'Deployment failed'
+            });

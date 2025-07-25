@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiro & Windsurf Starter Pack - Quick Start Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .step {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 4px solid #667eea;
+        }
+
+        .step h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            position: relative;
+            white-space: pre-line;
+        }
+
+        .code-block::before {
+            content: "Terminal";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #5a67d8;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature {
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feature h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .emoji {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .note {
+            background: #e6fffa;
+            border: 1px solid #81e6d9;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .note strong {
+            color: #234e52;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .step {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Kiro & Windsurf Starter Pack</h1>
+            <p>AI-Powered Development Template</p>
+        </div>
+
+        <div class="content">
+            <div class="step">
+                <h3>📋 Prerequisites</h3>
+                <p>Make sure you have the GitHub CLI installed:</p>
+                <div class="code-block">
+# Install GitHub CLI (if not already installed)
+# macOS
+brew install gh
+
+# Ubuntu/Debian
+sudo apt install gh
+
+# Windows
+winget install GitHub.cli
+                </div>
+                <button class="copy-btn" onclick="copyToClipboard('brew install gh')">Copy macOS Command</button>
+            </div>
+
+            <div class="step">
+                <h3>🎯 Create Your Project (Public Repository)</h3>
+                <p>Use this template to create a new public project:</p>
+                <div class="code-block">
+# Replace 'your-project-name' with your desired project name
+gh repo create your-project-name --template uratmangun/kiro-starter-pack --public --clone
+
+# Navigate to your new project
+cd your-project-name
+                </div>
+                <button class="copy-btn"
+                    onclick="copyToClipboard('gh repo create your-project-name --template uratmangun/kiro-starter-pack --public --clone')">Copy
+                    Command</button>
+            </div>
+
+            <div class="step">
+                <h3>🔒 Create Your Project (Private Repository)</h3>
+                <p>For a private repository, use this command instead:</p>
+                <div class="code-block">
+# Create a private repository
+gh repo create your-project-name --template uratmangun/kiro-starter-pack --private --clone
+
+# Navigate to your new project
+cd your-project-name
+                </div>
+                <button class="copy-btn"
+                    onclick="copyToClipboard('gh repo create your-project-name --template uratmangun/kiro-starter-pack --private --clone')">Copy
+                    Command</button>
+            </div>
+
+            <div class="note">
+                <strong>💡 Pro Tip:</strong> Replace <code>your-project-name</code> with your actual project name. The
+                GitHub CLI will automatically create the repository and clone it to your local machine.
+            </div>
+
+            <div class="step">
+                <h3>🚀 What You Get</h3>
+                <div class="features">
+                    <div class="feature">
+                        <span class="emoji">🤖</span>
+                        <h4>Kiro Integration</h4>
+                        <p>AI-powered workflows and automation hooks</p>
+                    </div>
+                    <div class="feature">
+                        <span class="emoji">🌊</span>
+                        <h4>Windsurf Ready</h4>
+                        <p>Pre-configured for Windsurf AI coding assistant</p>
+                    </div>
+                    <div class="feature">
+                        <span class="emoji">📝</span>
+                        <h4>Auto Documentation</h4>
+                        <p>Automatic README and documentation generation</p>
+                    </div>
+                    <div class="feature">
+                        <span class="emoji">🔄</span>
+                        <h4>Git Automation</h4>
+                        <p>Automated conventional commits and workflows</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3>🛠️ Next Steps</h3>
+                <p>After creating your project:</p>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li>Customize the README.md with your project details</li>
+                    <li>Configure Kiro hooks in <code>.kiro/hooks/</code></li>
+                    <li>Set up Windsurf workflows in <code>.windsurf/workflows/</code></li>
+                    <li>Start building your amazing project! 🎉</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function () {
+                // Show feedback
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.background = '#48bb78';
+
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#667eea';
+                }, 2000);
+            }).catch(function (err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+</body>
+
+</html>
