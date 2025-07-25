@@ -70,7 +70,26 @@ jobs:
               });
             }
 
-      - name: Create deployment status
+      - name: Create GitHub deployment
+        if: always()
+        id: create-deployment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.ADMIN_TOKEN }}
+          script: |
+            const deployment = await github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha,
+              environment: 'production',
+              description: 'Cloudflare Pages deployment',
+              auto_merge: false,
+              required_contexts: []
+            });
+            
+            return deployment.data.id;
+
+      - name: Update deployment status
         if: always()
         uses: actions/github-script@v7
         with:
@@ -78,11 +97,12 @@ jobs:
           script: |
             const deploymentUrl = '${{ steps.cloudflare-deploy.outputs.url }}';
             const state = '${{ job.status }}' === 'success' ? 'success' : 'failure';
+            const deploymentId = ${{ steps.create-deployment.outputs.result }};
             
             await github.rest.repos.createDeploymentStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              deployment_id: context.payload.deployment?.id || 0,
+              deployment_id: deploymentId,
               state: state,
               environment_url: deploymentUrl || '',
               description: state === 'success' ? 'Deployment succeeded' : 'Deployment failed'
