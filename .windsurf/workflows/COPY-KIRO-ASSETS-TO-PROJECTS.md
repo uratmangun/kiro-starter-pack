@@ -1,13 +1,11 @@
 ---
-description: Copies Windsurf workflows, rules, Kiro hooks, and steering rules to kiro-starter-pack and react-kiro-starter projects
+description: Copies Windsurf workflows, rules, Kiro hooks, and steering rules to all projects with .kiro and .windsurf folders
 ---
 
 You are a project asset synchronization specialist that copies essential Kiro and Windsurf configurations to target projects.
 
 ## Your Task
-Copy the following directories from the current citrea-boilerplate project to two target projects:
-- `/home/uratmangun/CascadeProjects/kiro-starter-pack`
-- `/home/uratmangun/CascadeProjects/react-kiro-starter`
+Dynamically find all projects in `/home/uratmangun/CascadeProjects` that contain `.kiro` or `.windsurf` folders and copy the following directories from the current project to them (excluding the current project itself).
 
 ## Directories to Copy
 1. `.windsurf/workflows/` - All Windsurf workflow files
@@ -17,84 +15,104 @@ Copy the following directories from the current citrea-boilerplate project to tw
 
 ## Copy Process
 
-### Step 1: Verify Target Projects Exist
-Check that both target projects exist:
-
+### Step 1: Find Target Projects
+// turbo
 ```fish
-# Check if target directories exist
-if test -d /home/uratmangun/CascadeProjects/kiro-starter-pack
-    echo "✓ kiro-starter-pack exists"
-else
-    echo "✗ kiro-starter-pack not found"
+# Find all projects with .kiro or .windsurf folders (excluding current project)
+set TARGET_PROJECTS
+set CURRENT_PROJECT (basename (pwd))
+
+for project_dir in /home/uratmangun/CascadeProjects/*
+    set project_name (basename $project_dir)
+    
+    # Skip current project
+    if test "$project_name" = "$CURRENT_PROJECT"
+        continue
+    end
+    
+    # Check if project has .kiro or .windsurf folders
+    if test -d "$project_dir/.kiro"; or test -d "$project_dir/.windsurf"
+        set TARGET_PROJECTS $TARGET_PROJECTS $project_dir
+        echo "✓ Found target project: $project_name"
+    end
 end
 
-if test -d /home/uratmangun/CascadeProjects/react-kiro-starter
-    echo "✓ react-kiro-starter exists"
+if test (count $TARGET_PROJECTS) -eq 0
+    echo "✗ No target projects found with .kiro or .windsurf folders"
+    exit 1
 else
-    echo "✗ react-kiro-starter not found"
+    echo "Found" (count $TARGET_PROJECTS) "target projects"
 end
 ```
 
-### Step 2: Copy to kiro-starter-pack
+### Step 2: Copy Assets to All Target Projects
 // turbo
 ```fish
-# Create target directories if they don't exist
-mkdir -p /home/uratmangun/CascadeProjects/kiro-starter-pack/.windsurf
-mkdir -p /home/uratmangun/CascadeProjects/kiro-starter-pack/.kiro
-
-# Copy workflows directory
-cp -r .windsurf/workflows /home/uratmangun/CascadeProjects/kiro-starter-pack/.windsurf/
-
-# Copy rules directory
-cp -r .windsurf/rules /home/uratmangun/CascadeProjects/kiro-starter-pack/.windsurf/
-
-# Copy hooks directory
-cp -r .kiro/hooks /home/uratmangun/CascadeProjects/kiro-starter-pack/.kiro/
-
-# Copy steering directory
-cp -r .kiro/steering /home/uratmangun/CascadeProjects/kiro-starter-pack/.kiro/
-
-echo "✓ Copied all assets to kiro-starter-pack"
+# Copy to each target project
+for target_project in $TARGET_PROJECTS
+    set project_name (basename $target_project)
+    echo "=== Copying to $project_name ==="
+    
+    # Create target directories if they don't exist
+    mkdir -p "$target_project/.windsurf"
+    mkdir -p "$target_project/.kiro"
+    
+    # Copy workflows directory if it exists in source
+    if test -d .windsurf/workflows
+        cp -r .windsurf/workflows "$target_project/.windsurf/"
+        echo "  ✓ Copied workflows"
+    end
+    
+    # Copy rules directory if it exists in source
+    if test -d .windsurf/rules
+        cp -r .windsurf/rules "$target_project/.windsurf/"
+        echo "  ✓ Copied rules"
+    end
+    
+    # Copy hooks directory if it exists in source
+    if test -d .kiro/hooks
+        cp -r .kiro/hooks "$target_project/.kiro/"
+        echo "  ✓ Copied hooks"
+    end
+    
+    # Copy steering directory if it exists in source
+    if test -d .kiro/steering
+        cp -r .kiro/steering "$target_project/.kiro/"
+        echo "  ✓ Copied steering"
+    end
+    
+    echo "  ✓ Completed copying to $project_name"
+end
 ```
 
-### Step 3: Copy to react-kiro-starter
+### Step 3: Verify Copy Success
 // turbo
 ```fish
-# Create target directories if they don't exist
-mkdir -p /home/uratmangun/CascadeProjects/react-kiro-starter/.windsurf
-mkdir -p /home/uratmangun/CascadeProjects/react-kiro-starter/.kiro
-
-# Copy workflows directory
-cp -r .windsurf/workflows /home/uratmangun/CascadeProjects/react-kiro-starter/.windsurf/
-
-# Copy rules directory
-cp -r .windsurf/rules /home/uratmangun/CascadeProjects/react-kiro-starter/.windsurf/
-
-# Copy hooks directory
-cp -r .kiro/hooks /home/uratmangun/CascadeProjects/react-kiro-starter/.kiro/
-
-# Copy steering directory
-cp -r .kiro/steering /home/uratmangun/CascadeProjects/react-kiro-starter/.kiro/
-
-echo "✓ Copied all assets to react-kiro-starter"
-```
-
-### Step 4: Verify Copy Success
-// turbo
-```fish
-# Verify kiro-starter-pack
-echo "=== kiro-starter-pack verification ==="
-echo "Workflows:"; and ls -la /home/uratmangun/CascadeProjects/kiro-starter-pack/.windsurf/workflows/ | wc -l
-echo "Rules:"; and ls -la /home/uratmangun/CascadeProjects/kiro-starter-pack/.windsurf/rules/ | wc -l
-echo "Hooks:"; and ls -la /home/uratmangun/CascadeProjects/kiro-starter-pack/.kiro/hooks/ | wc -l
-echo "Steering:"; and ls -la /home/uratmangun/CascadeProjects/kiro-starter-pack/.kiro/steering/ | wc -l
-
-# Verify react-kiro-starter
-echo "=== react-kiro-starter verification ==="
-echo "Workflows:"; and ls -la /home/uratmangun/CascadeProjects/react-kiro-starter/.windsurf/workflows/ | wc -l
-echo "Rules:"; and ls -la /home/uratmangun/CascadeProjects/react-kiro-starter/.windsurf/rules/ | wc -l
-echo "Hooks:"; and ls -la /home/uratmangun/CascadeProjects/react-kiro-starter/.kiro/hooks/ | wc -l
-echo "Steering:"; and ls -la /home/uratmangun/CascadeProjects/react-kiro-starter/.kiro/steering/ | wc -l
+# Verify each target project
+for target_project in $TARGET_PROJECTS
+    set project_name (basename $target_project)
+    echo "=== $project_name verification ==="
+    
+    if test -d "$target_project/.windsurf/workflows"
+        set workflow_count (ls -1 "$target_project/.windsurf/workflows/" | wc -l)
+        echo "  Workflows: $workflow_count files"
+    end
+    
+    if test -d "$target_project/.windsurf/rules"
+        set rules_count (ls -1 "$target_project/.windsurf/rules/" | wc -l)
+        echo "  Rules: $rules_count files"
+    end
+    
+    if test -d "$target_project/.kiro/hooks"
+        set hooks_count (ls -1 "$target_project/.kiro/hooks/" | wc -l)
+        echo "  Hooks: $hooks_count files"
+    end
+    
+    if test -d "$target_project/.kiro/steering"
+        set steering_count (ls -1 "$target_project/.kiro/steering/" | wc -l)
+        echo "  Steering: $steering_count files"
+    end
+end
 ```
 
 ## What Gets Copied
@@ -126,4 +144,4 @@ echo "Steering:"; and ls -la /home/uratmangun/CascadeProjects/react-kiro-starter
 - Maintains file permissions and timestamps
 - Uses fish shell syntax throughout
 
-This workflow ensures both target projects have the same Kiro and Windsurf configurations as the source citrea-boilerplate project.
+This workflow ensures all target projects with existing .kiro or .windsurf folders have the same Kiro and Windsurf configurations as the source project, automatically discovering and updating them without manual configuration.
