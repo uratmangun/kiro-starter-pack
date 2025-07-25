@@ -1,0 +1,14 @@
+{
+  "enabled": true,
+  "name": "CREATE-AKINDO-PITCH",
+  "description": "Monitors project files and automatically generates or updates a comprehensive AKINDO pitch document with project details",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": ["*"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Please create or update the AKINDO pitch document in the PITCH/AKINDO directory. Create a text file that includes the following sections:\n\nPROJECT NAME\nThe name of this project\n\nPROJECT DESCRIPTION\nDescription of this project\n\nTAGLINE\nExactly three comma-separated words that describe the project (e.g., react,citrea,boilerplate)\n\nWHAT IT DOES\nWhat the project does (maximum 500 characters)\n\nTHE PROBLEM IT SOLVES\nThe problem it solves (maximum 500 characters)\n\nCHALLENGES I RAN INTO\nChallenges encountered during development (maximum 500 characters)\n\nTECHNOLOGIES I USED\nTechnologies used in the project (maximum 500 characters)\n\nHOW WE BUILT IT\nHow the project was built (maximum 500 characters)\n\nWHAT WE LEARNED\nWhat was learned during development (maximum 500 characters)\n\nWHAT'S NEXT FOR\nFuture plans for the project (maximum 500 characters)\n\nUPDATE OF THIS PROJECT TODAY\nCurrent status and recent updates\n\nUse information from the project files to create comprehensive and accurate content. Make sure to format it as plain text (not markdown). If any information is missing, use reasonable assumptions based on the available project files. Ensure the content is well-organized and professional. For sections with character limits, ensure content stays within the 500 character maximum."
+  }
+}
