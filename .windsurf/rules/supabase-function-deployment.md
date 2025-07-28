@@ -3,7 +3,7 @@ name: "Supabase Function Deployment Process"
 activation_mode: "always_on"
 description: "Defines the standard process for deploying Supabase functions using Docker container operations"
 ---
----
+
 
 # Supabase Edge Functions Deployment
 
