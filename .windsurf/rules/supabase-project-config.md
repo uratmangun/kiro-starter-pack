@@ -1,9 +1,7 @@
 ---
-name: "Supabase Project Configuration Management"
-activation_mode: "always_on"
+trigger: model_decision
 description: "Defines dynamic project ID detection and container naming patterns for Supabase operations"
 ---
-
 
 # Supabase Project Configuration
 
