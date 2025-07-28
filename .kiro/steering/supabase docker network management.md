@@ -1,5 +1,6 @@
 ---
-inclusion: always
+inclusion: fileMatch
+fileMatchPattern: ['supabase/**/*']
 ---
 
 # Supabase Docker Network and Configuration Management

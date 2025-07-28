@@ -1,6 +1,7 @@
 ---
-trigger: model_decision
-description: Ensures proper Docker network configuration and JWT secret handling for Supabase database restarts
+trigger: glob
+description: "Applies Supabase Docker network configuration and JWT secret handling for Supabase-related files"
+globs: "supabase/**/*"
 ---
 
 # Supabase Docker Network and Configuration Management

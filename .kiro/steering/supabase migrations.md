@@ -1,7 +1,6 @@
 ---
-trigger: glob
-description: "Applies Supabase migration standards for SQL migration files"
-globs: "supabase/migrations/**/*.sql"
+inclusion: fileMatch
+fileMatchPattern: ['supabase/migrations/**/*.sql']
 ---
 
 # Supabase Migration Standards
@@ -98,6 +97,3 @@ end
 - **Project ID Source**: `supabase/config.toml` (never hardcode)
 - **Container Pattern**: `supabase_db_[PROJECT_ID]`
 - **Database**: `postgres`
-- **User**: `postgres`
-
-This pattern ensures migrations are applied consistently and database resets are performed safely with proper backup/restore procedures.
