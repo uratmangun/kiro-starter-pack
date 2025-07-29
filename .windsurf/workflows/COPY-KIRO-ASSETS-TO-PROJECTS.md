@@ -18,30 +18,41 @@ Dynamically find all projects in `/home/uratmangun/CascadeProjects` that contain
 ### Step 1: Find Target Projects
 // turbo
 ```fish
-# Find all projects with .kiro or .windsurf folders (excluding current project)
-set TARGET_PROJECTS
+# Initialize empty list and get current project name
+set -g TARGET_PROJECTS
 set CURRENT_PROJECT (basename (pwd))
+echo "Current project: $CURRENT_PROJECT"
+echo "Scanning /home/uratmangun/CascadeProjects for target projects..."
+```
 
-for project_dir in /home/uratmangun/CascadeProjects/*
-    set project_name (basename $project_dir)
-    
-    # Skip current project
-    if test "$project_name" = "$CURRENT_PROJECT"
-        continue
-    end
-    
-    # Check if project has .kiro or .windsurf folders
-    if test -d "$project_dir/.kiro"; or test -d "$project_dir/.windsurf"
-        set TARGET_PROJECTS $TARGET_PROJECTS $project_dir
-        echo "✓ Found target project: $project_name"
+// turbo
+```fish
+# Find projects with .kiro or .windsurf folders
+for project_path in /home/uratmangun/CascadeProjects/*
+    if test -d "$project_path"
+        set project_name (basename "$project_path")
+        if test "$project_name" != "$CURRENT_PROJECT"
+            if test -d "$project_path/.kiro"; or test -d "$project_path/.windsurf"
+                set TARGET_PROJECTS $TARGET_PROJECTS "$project_path"
+                echo "✓ Found target project: $project_name"
+            end
+        end
     end
 end
+```
 
+// turbo
+```fish
+# Verify we found target projects
 if test (count $TARGET_PROJECTS) -eq 0
     echo "✗ No target projects found with .kiro or .windsurf folders"
     exit 1
 else
-    echo "Found" (count $TARGET_PROJECTS) "target projects"
+    echo "\nFound" (count $TARGET_PROJECTS) "target projects:"
+    for proj in $TARGET_PROJECTS
+        echo "  - "(basename $proj)
+    end
+    echo ""
 end
 ```
 

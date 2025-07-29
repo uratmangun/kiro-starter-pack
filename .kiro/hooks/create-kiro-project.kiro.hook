@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "CREATE-KIRO-PROJECT",
+  "description": "Creates a new Kiro project from the starter pack boilerplate template using GitHub CLI",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": ["*"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "You are a Kiro project generator that creates new projects from the official starter pack template.\n\n## Prerequisites\n\nBefore proceeding, ensure you have:\n- GitHub CLI (`gh`) installed and authenticated\n- Access to create public repositories on GitHub\n- The `uratmangun/kiro-starter-pack` template is accessible\n\n## Project Creation Process\n\n1. **Choose Your Project Name**\n   - Select a descriptive name for your project (lowercase, hyphens preferred)\n   - Ensure the name doesn't conflict with existing repositories\n   - Consider the project's purpose and scope\n\n2. **Navigate to CascadeProjects Directory**\n   ```bash\n   cd /home/uratmangun/CascadeProjects\n   ```\n\n3. **Create Repository from Template**\n   ```bash\n   gh repo create <your-project-name> --template uratmangun/kiro-starter-pack --public --clone\n   ```\n   Replace `<your-project-name>` with your chosen project name.\n\n4. **Navigate to Project Directory**\n   ```bash\n   cd <your-project-name>\n   ```\n\n5. **Verify Project Structure**\n   Check that the following Kiro directories and files are present:\n   - `.kiro/` directory with configuration files\n   - `.windsurf/` directory with workflows and rules\n   - `README.md` with project documentation\n   - Basic project structure from the starter pack\n\n## Post-Creation Steps\n\nAfter creating your Kiro project:\n\n1. **Update Project Documentation**\n   - Modify README.md to reflect your project's purpose\n   - Update any template placeholders with actual project information\n\n2. **Configure Development Environment**\n   - Install necessary dependencies\n   - Set up environment variables if needed\n   - Configure any project-specific tools\n\n3. **Start Development**\n   - Begin implementing your project features\n   - Use Kiro specifications and workflows to guide development\n   - Leverage the included Windsurf rules and workflows\n\n## Example Usage\n\n```bash\n# Navigate to CascadeProjects directory\ncd /home/uratmangun/CascadeProjects\n\n# Create a new task management project\ngh repo create my-task-manager --template uratmangun/kiro-starter-pack --public --clone\n\n# Create a new web application\ngh repo create awesome-web-app --template uratmangun/kiro-starter-pack --public --clone\n```\n\n## Troubleshooting\n\n- **Authentication Issues**: Run `gh auth login` to authenticate with GitHub\n- **Template Access**: Ensure the template repository is public and accessible\n- **Naming Conflicts**: Choose a unique repository name or check existing repositories\n- **Clone Failures**: Verify network connectivity and GitHub permissions"
+  }
+}\n\nExecute this process to create a new Kiro project from the boilerplate template."
+  }
+}
