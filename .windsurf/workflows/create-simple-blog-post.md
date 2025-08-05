@@ -18,10 +18,9 @@ This workflow analyzes your project and generates a simple blog post highlightin
 
 5. **Analyze project type**: Determine if it's a web app, API, CLI tool, etc. based on file structure and dependencies.
 
-6. **Create demo content**: For web applications with deployed URLs, capture screenshots:
-   - **IMPORTANT**: NEVER start local development servers - always use deployed URLs
-   - Use deployed website URLs for screenshots when available
-   - For non-web projects, prepare repository embedding format
+6. **Create demo content**: Prepare repository embedding format for all projects:
+   - Get repository URL from GitHub CLI or git remote
+   - Use repository embedding format: `{% embed repository_url %}`
 
 7. **Create blog post**: Generate a comprehensive blog post with the following structure:
 
@@ -54,8 +53,6 @@ This project follows spec-driven development using Kiro specifications:
 3. **Feature 3**: Describe additional functionality
 
 ## Demo
-[For web apps: Include up to 3 screenshots with descriptions]
-[For non-web projects: Include repository embedding]
 {% embed https://github.com/[username]/[repo-name] %}
 
 ## Getting Started
@@ -95,12 +92,8 @@ The blog post should be comprehensive, professional, and ready for customization
    - If GitHub CLI is not available, extract repository URL from git remote: `git remote get-url origin`
    - Use repository embedding format for all projects: `{% embed repository_url %}`
 
-2. **For all applications**:
-   - Use repository embedding format: `{% embed repository_url %}`
-   - Include repository URL from GitHub CLI or git remote
-
 ### Blog Post Enhancement:
 - Include a dedicated section about the Kiro specification methodology
 - List all specifications created with brief descriptions of their purpose
-- Add visual demo content (screenshots for web apps, repo embedding for others)
+- Add repository embedding for demo content
 - Emphasize the spec-driven development workflow as a key project feature

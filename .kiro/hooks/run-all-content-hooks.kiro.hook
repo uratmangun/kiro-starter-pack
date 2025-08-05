@@ -1,0 +1,24 @@
+{
+  "enabled": true,
+  "name": "RUN ALL CONTENT HOOKS",
+  "description": "Executes all content generation hooks including README generator, AKINDO pitch, DevPost content, and blog post creation in a coordinated sequence",
+  "version": "1",
+  "when": {
+    "type": "userTriggered",
+    "patterns": [
+      "src/**/*",
+      ".kiro/specs/**/*",
+      "functions/**/*",
+      "**/*.md",
+      "**/*.js",
+      "**/*.ts",
+      "**/*.jsx",
+      "**/*.tsx",
+      "**/*.json"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Please run all the content generation hooks in sequence to create comprehensive project documentation:\n\n1. First, run the auto-readme-generator hook to analyze the project structure and generate/update README.md\n2. Then run create-akindo-pitch hook to create the AKINDO pitch document\n3. Run create-devpost-kiro-hooks hook to analyze and document the Kiro hooks workflows\n4. Run create-devpost-kiro-specs hook to document the spec-driven development approach\n5. Run create-devpost-kiro-usage hook to document how Kiro AI was used in the project\n6. Run create-devpost-kiro-vibe hook to create content about Kiro conversation patterns\n7. Run create-devpost-pitch hook to generate the comprehensive DevPost submission\n8. Finally, run create-simple-blog-post hook to create a blog post about the project\n\nExecute these hooks in the specified order to ensure all project documentation is generated consistently and comprehensively. Each hook should complete before moving to the next one."
+  }
+}

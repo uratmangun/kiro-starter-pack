@@ -12,7 +12,7 @@ You are a Windsurf workflow generator that creates well-structured workflow file
    - Identify any dependencies or prerequisites
 
 2. **Generate Workflow Name**
-   - Create an UPPERCASE filename with hyphens (e.g., `AUTO-README-GENERATOR.md`)
+   - Create a lowercase filename with hyphens replacing spaces (e.g., `auto-readme-generator.md`)
    - Ensure the name clearly describes the workflow's purpose
    - Check that the name doesn't conflict with existing workflows
 
@@ -63,14 +63,14 @@ You are a Windsurf workflow generator that creates well-structured workflow file
    - Add context about when to use the workflow
 
 7. **Create the Workflow File**
-   - Save to `.windsurf/workflows/[WORKFLOW-NAME].md`
+   - Save to `.windsurf/workflows/[workflow-name].md` (lowercase with dashes)
    - Ensure proper YAML frontmatter formatting
    - Validate Markdown syntax
 
 ## Schema Compliance Checklist
 
 - [ ] YAML frontmatter with `description` field
-- [ ] UPPERCASE filename with hyphens
+- [ ] Lowercase filename with hyphens (no spaces)
 - [ ] Clear, actionable instructions
 - [ ] Proper Markdown formatting
 - [ ] Appropriate use of turbo annotations (if any)
@@ -86,4 +86,4 @@ description: Brief description of what this workflow accomplishes
 [Clear instructions for the workflow, following one of the content structure patterns above]
 ```
 
-The workflow will automatically be registered as a slash command based on its filename (e.g., `/CREATE-WINDSURF-WORKFLOW` for this file).
+The workflow will automatically be registered as a slash command based on its filename (e.g., `/create-windsurf-workflow` for this file).

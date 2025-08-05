@@ -6,7 +6,9 @@
   "when": {
     "type": "userTriggered",
     "patterns": [
-      ".kiro/specs/**/*"
+      "src/**/*",
+      ".kiro/specs/**/*",
+      "functions/**/*"
     ]
   },
   "then": {

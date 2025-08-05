@@ -4,48 +4,28 @@ inclusion: always
 
 # Development Server Manual Start Policy
 
-## Server Startup Behavior
+**CRITICAL**: Never automatically execute development server commands. Users must start servers manually to maintain control over resource usage and development workflow.
 
-**MANDATORY**: Never automatically start development servers for web applications. Always let the user start them manually.
+## Prohibited Commands
 
-### Prohibited Actions
+Do not auto-execute these development server commands:
+- `pnpm dev`, `yarn dev`, `npm start`, `bun dev`
+- Framework-specific: `next dev`, `vite`, `ng serve`, `vue-cli-service serve`
+- Static servers: `serve`, `http-server`, `python -m http.server`
 
-- Do not run `npm start`, `bun dev`, `pnpm dev`, or similar commands automatically
-- Do not execute `yarn start`, `npm run dev`, or framework-specific dev commands
-- Do not start servers for React, Vue, Angular, Next.js, Vite, or other web frameworks
-- Do not automatically run `serve`, `http-server`, or local server commands
+## Allowed Actions
 
-### Permitted Actions
+- **Suggest** the appropriate start command
+- **Provide** setup instructions for development servers
+- **Configure** server settings and environment variables
+- **Execute** build commands (`pnpm build`, `yarn build`)
+- **Execute** test commands (`pnpm test`, `yarn test`)
 
-- Suggest the appropriate command to start the server
-- Provide instructions on how to start the development server
-- Offer to create or update start scripts in package.json
-- Help configure server settings and environment variables
+## Response Pattern
 
-### Framework-Specific Examples
-
-**React/Create React App:**
-```bash
-# Don't auto-run: npm start
-# Instead suggest: "Run 'npm start' to start the development server"
+When development server startup is needed:
+```
+To start the development server, run: `pnpm dev`
 ```
 
-**Next.js:**
-```bash
-# Don't auto-run: bun dev
-# Instead suggest: "Run 'bun dev' to start the Next.js development server"
-```
-
-**Vite:**
-```bash
-# Don't auto-run: pnpm dev
-# Instead suggest: "Run 'pnpm dev' to start the Vite development server"
-```
-
-### Exception Handling
-
-- Build commands (`npm run build`, `bun build`) are allowed
-- Test commands (`npm test`, `bun test`) are allowed
-- Production server commands may be suggested but not auto-executed
-
-This ensures the user maintains control over when and how development servers are started, preventing unwanted resource usage and allowing proper development workflow management.
+Never execute the command automatically. This policy ensures users control when servers consume system resources and prevents unwanted background processes.

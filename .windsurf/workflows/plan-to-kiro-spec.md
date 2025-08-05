@@ -69,12 +69,7 @@ You are a Kiro specification generator that converts Windsurf plans into structu
    Convert plan action items into trackable implementation tasks:
    
    ```markdown
-   # [Feature Name] Implementation Plan
-   
-   ## Task Overview
-   [Brief description of implementation approach]
-   
-   ## Implementation Tasks
+   # Implementation Plan
    
    - [ ] 1. [Task Description]
      - [Specific implementation details]
@@ -87,11 +82,6 @@ You are a Kiro specification generator that converts Windsurf plans into structu
      - _Requirements: [Reference to requirements]_
    
    [Continue for all implementation tasks...]
-   
-   ## Success Criteria
-   - [How to verify successful completion]
-   - [Testing requirements]
-   - [Quality standards to meet]
    ```
 
 6. **Apply Quality Standards**

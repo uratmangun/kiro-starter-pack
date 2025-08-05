@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "CONTINUE",
+  "description": "Continue conversation",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Continue the conversation from where it was left off."
+  }
+}
