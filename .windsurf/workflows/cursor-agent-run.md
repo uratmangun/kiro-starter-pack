@@ -34,20 +34,20 @@ set PROMPT "<your prompt here>"
 - `json`: structured JSON, easy to parse in scripts
 - `stream-json`: streaming JSON (default when using --print)
 
-5. Run Cursor Agent in non-interactive mode (no file writes or shell by default). Uses model -m gpt-5-fast.
+5. Run Cursor Agent in non-interactive mode (no file writes or shell by default). Uses model -m gpt-5.
 - Plain text output:
 ```fish
-echo $PROMPT | cursor-agent --print --output-format text -m gpt-5-fast
+echo $PROMPT | cursor-agent --print --output-format text -m gpt-5
 ```
 - JSON output:
 ```fish
-echo $PROMPT | cursor-agent --print --output-format json -m gpt-5-fast
+echo $PROMPT | cursor-agent --print --output-format json -m gpt-5
 ```
- - The examples in this workflow enforce the model via `-m gpt-5-fast` for consistency.
+ - The examples in this workflow enforce the model via `-m gpt-5` for consistency.
 6. Capture output to a file (useful in CI)
 ```fish
 # For JSON output saved to a file
-echo $PROMPT | cursor-agent --print --output-format json -m gpt-5-fast | tee agent-output.json
+echo $PROMPT | cursor-agent --print --output-format json -m gpt-5 | tee agent-output.json
 ```
 
 7. Safety and best practices
