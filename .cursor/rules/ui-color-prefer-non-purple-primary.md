@@ -1,5 +1,6 @@
 ---
-type: "always_apply"
+description: Prefer non-purple as the primary UI color; use purple only as secondary/accent unless brand requires it
+alwaysApply: true
 ---
 
 # UI Color Palette Preference

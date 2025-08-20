@@ -1,7 +1,8 @@
 ---
-type: "always_apply"
-description: "Example description"
+description: Never automatically start development servers; require manual start by the user
+alwaysApply: true
 ---
+
 # Development Server Manual Start Policy
 
 ## Server Startup Behavior
@@ -28,3 +29,4 @@ description: "Example description"
 ```bash
 # Don't auto-run: npm start
 # Instead suggest: "Run 'npm start' to start the development server"
+```

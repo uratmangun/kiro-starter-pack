@@ -1,0 +1,36 @@
+{
+    "mcpServers": {
+        "cloudflare-docs": {
+            "serverUrl": "https://docs.mcp.cloudflare.com/sse"
+        },
+        "cloudflare-graphql": {
+            "serverUrl": "https://graphql.mcp.cloudflare.com/sse"
+        },
+        "linear": {
+            "serverUrl": "https://mcp.linear.app/sse"
+        },
+        "Bright Data": {
+            "serverUrl": "https://server.smithery.ai/@luminati-io/brightdata-mcp/mcp"
+        },
+        "exa": {
+            "serverUrl": "https://server.smithery.ai/exa/mcp"
+        },
+        "Sequential thinking": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-sequential-thinking"
+            ]
+        },
+        "Context 7": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@upstash/context7-mcp@latest"
+            ]
+        },
+        "github": {
+            "serverUrl": "https://api.githubcopilot.com/mcp"
+        }
+    }
+}

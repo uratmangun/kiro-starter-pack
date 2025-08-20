@@ -1,5 +1,6 @@
 ---
-type: "always_apply"
+description: Enforce fish shell syntax for all terminal commands and provide bash-to-fish conversion patterns
+alwaysApply: true
 ---
 
 # Shell Execution Standards

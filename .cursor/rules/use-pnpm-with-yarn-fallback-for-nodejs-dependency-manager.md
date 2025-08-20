@@ -1,5 +1,6 @@
 ---
-type: "always_apply"
+description: Enforce pnpm as the primary package manager with yarn as fallback only; never use npm or bun
+alwaysApply: true
 ---
 
 # Node.js Package Manager Standards
